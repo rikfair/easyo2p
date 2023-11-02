@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+__*__
+*.egg-info
+
+docs/_build
