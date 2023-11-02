@@ -60,11 +60,14 @@ pause
 
 rem =============================================
 
-echo Running unittests
-
-rem =============================================
-
 echo Building project
+
+cd "%HOME%"
+set PYTHONPATH=%PYTHONPATH_THIS%
+"%PYTHONHOME%\python" -m build
+
+echo Check build is correct before proceeding
+pause
 
 rem =============================================
 
@@ -78,9 +81,39 @@ pause
 
 rem =============================================
 
-rem =============================================
+echo Uploading to testpypi
+cd "%HOME%"
+%PYTHONHOME%\python -m twine upload --verbose --repository testpypi dist/*
+echo Confirm upload to testpypi
+pause
+
+echo Install from testpypi
+set PYTHONPATH=%PYTHONPATH_ORIG%
+"%PYTHONHOME%\python" -m pip install --upgrade --index-url https://test.pypi.org/simple/ %REPOS%
+echo Confirm install from testpypi
+pause
+
+echo Uninstalling %REPOS%
+"%PYTHONHOME%\python" -m pip uninstall -y %REPOS%
 
 rem =============================================
+
+set PYTHONPATH=%PYTHONPATH_THIS%
+"%PYTHONHOME%\python" -c "import %REPOS% as x; print(f'Confirm all code submitted to GitHub with version: v{x.__version__}')"
+pause
+
+rem =============================================
+
+echo Uploading to pypi
+%PYTHONHOME%\python -m twine upload --verbose --repository pypi dist/*
+echo Confirm upload to pypi
+pause
+
+echo Install from pypi
+set PYTHONPATH=%PYTHONPATH_ORIG%
+"%PYTHONHOME%\python" -m pip install --upgrade %REPOS%
+echo Confirm install from pypi
+pause
 
 rem =============================================
 

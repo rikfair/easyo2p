@@ -3,4 +3,6 @@
 __*__
 *.egg-info
 
+dist/
+
 docs/_build
