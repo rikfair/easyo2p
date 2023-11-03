@@ -83,7 +83,7 @@ rem =============================================
 
 echo Uploading to testpypi
 cd "%HOME%"
-%PYTHONHOME%\python -m twine upload --verbose --repository testpypi dist/*
+%PYTHONHOME%\python -m twine upload --verbose --config-file %HOME%\.pypirc --repository testpypi dist/*
 echo Confirm upload to testpypi
 pause
 
@@ -105,7 +105,7 @@ pause
 rem =============================================
 
 echo Uploading to pypi
-%PYTHONHOME%\python -m twine upload --verbose --repository pypi dist/*
+%PYTHONHOME%\python -m twine upload --verbose --config-file %HOME%\.pypirc --repository pypi dist/*
 echo Confirm upload to pypi
 pause
 

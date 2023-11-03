@@ -6,3 +6,5 @@ __*__
 dist/
 
 docs/_build
+
+.pypirc
